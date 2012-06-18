@@ -1,0 +1,105 @@
+=== start of normal history ===
+1  : from numpy import *
+2  : _ip.magic("hist ")
+3  : _ip.magic("hist -n")
+5  : X = loadtxt('D01', dtype=[('datetime', 'datetime'), ('customerID', 'int32'), ('age', 'S5'), ('residence', 'S5'),('productClass', 'int32'), ('productID', 'int64'), ('amount', 'int32'), ('asset','int32'), ('salePrice', 'int32')], delimiter=';', skiprows=1
+6  : )
+7  : import datetime
+8  : X = loadtxt('D01', dtype=[('datetime', datetime), ('customerID', 'int32'), ('age', 'S5'), ('residence', 'S5'),('productClass', 'int32'), ('productID', 'int64'), ('amount', 'int32'), ('asset','int32'), ('salePrice', 'int32')], delimiter=';', skiprows=1)
+9  : d = dtype=[('datetime', datetime), ('customerID', 'int32'), ('age', 'S5'), ('residence', 'S5'),('productClass', 'int32'), ('productID', 'int64'), ('amount', 'int32'), ('asset','int32'), ('salePrice', 'int32')]
+10 : ds
+11 : d
+12 : dtype=[('datetime', datetime), ('customerID', 'int32'), ('age', 'S5'), ('residence', 'S5'),('productClass', 'int32'), ('productID', 'int64'), ('amount', 'int32'), ('asset','int32'), ('salePrice', 'int32')]
+13 : dtype([('datetime', datetime), ('customerID', 'int32'), ('age', 'S5'), ('residence', 'S5'),('productClass', 'int32'), ('productID', 'int64'), ('amount', 'int32'), ('asset','int32'), ('salePrice', 'int32')])
+14 : dtype('int32')
+15 : import numpy as np
+16 : np.dtype('int32')
+17 : np.dtype([('datetime', datetime), ('customerID', 'int32'), ('age', 'S5'), ('residence', 'S5'),('productClass', 'int32'), ('productID', 'int64'), ('amount', 'int32'), ('asset','int32'), ('salePrice', 'int32')])
+18 : np.dtype([('datetime', np.datetime), ('customerID', 'int32'), ('age', 'S5'), ('residence', 'S5'),('productClass', 'int32'), ('productID', 'int64'), ('amount', 'int32'), ('asset','int32'), ('salePrice', 'int32')])
+19 : np.dtype([('customerID', 'int32'), ('age', 'S5'), ('residence', 'S5'),('productClass', 'int32'), ('productID', 'int64'), ('amount', 'int32'), ('asset','int32'), ('salePrice', 'int32')])
+20 : datetime
+21 : np.dtype([('datetime', S20), ('customerID', 'int32'), ('age', 'S5'), ('residence', 'S5'),('productClass', 'int32'), ('productID', 'int64'), ('amount', 'int32'), ('asset','int32'), ('salePrice', 'int32')])
+22 : np.dtype([('datetime', 'S20'), ('customerID', 'int32'), ('age', 'S5'), ('residence', 'S5'),('productClass', 'int32'), ('productID', 'int64'), ('amount', 'int32'), ('asset','int32'), ('salePrice', 'int32')])
+23 : X = loadtxt('D01', dtype = np.dtype([('datetime', 'S20'), ('customerID', 'int32'), ('age', 'S5'), ('residence', 'S5'),('productClass', 'int32'), ('productID', 'int64'), ('amount', 'int32'), ('asset','int32'), ('salePrice', 'int32')]), delimiter=';', skiprows=1)
+24 : X
+25 : X = loadtxt('D01', dtype = dtype([('datetime', 'S20'), ('customerID', 'int32'), ('age', 'S5'), ('residence', 'S5'),('productClass', 'int32'), ('productID', 'int64'), ('amount', 'int32'), ('asset','int32'), ('salePrice', 'int32')]), delimiter=';', skiprows=1)
+26 : X = loadtxt('D01', dtype = ([('datetime', 'S20'), ('customerID', 'int32'), ('age', 'S5'), ('residence', 'S5'),('productClass', 'int32'), ('productID', 'int64'), ('amount', 'int32'), ('asset','int32'), ('salePrice', 'int32')]), delimiter=';', skiprows=1)
+27 : X
+28 : _ip.magic("hist ")
+29 : X
+30 : D01 = loadtxt('D01', dtype = ([('datetime', 'S20'), ('customerID', 'int32'), ('age', 'S5'), ('residence', 'S5'),('productClass', 'int32'), ('productID', 'int64'), ('amount', 'int32'), ('asset','int32'), ('salePrice', 'int32')]), delimiter=';', skiprows=1)
+31 : D02 = loadtxt('D02', dtype = ([('datetime', 'S20'), ('customerID', 'int32'), ('age', 'S5'), ('residence', 'S5'),('productClass', 'int32'), ('productID', 'int64'), ('amount', 'int32'), ('asset','int32'), ('salePrice', 'int32')]), delimiter=';', skiprows=1)
+32 : D11 = loadtxt('D11', dtype = ([('datetime', 'S20'), ('customerID', 'int32'), ('age', 'S5'), ('residence', 'S5'),('productClass', 'int32'), ('productID', 'int64'), ('amount', 'int32'), ('asset','int32'), ('salePrice', 'int32')]), delimiter=';', skiprows=1)
+33 : D12 = loadtxt('D12', dtype = ([('datetime', 'S20'), ('customerID', 'int32'), ('age', 'S5'), ('residence', 'S5'),('productClass', 'int32'), ('productID', 'int64'), ('amount', 'int32'), ('asset','int32'), ('salePrice', 'int32')]), delimiter=';', skiprows=1)
+34 : userDict = {}
+35 : itemDict = {}
+37 : ind = 0for data in [D01, D02, D11, D12]:
+38 :     for u in data[:,1]:
+39 :         userDict[u] = ind
+40 :         ind+=1
+41 : for data in [D01, D02, D11, D12]:
+42 :     for u in data[:,1]:
+43 :         userDict[u] = ind
+44 :         ind+=1
+45 : ind = 0
+47 : for i in D01[:,1]
+49 : D01[:,1]
+50 : D01[:,customerID]
+51 : D01[:,'customerID']
+52 : D01
+53 : D01 = loadtxt('D01', dtype = ([('datetime', 'S20'), ('customerID', 'int32'), ('age', 'S5'), ('residence', 'S5'),('productClass', 'int32'), ('productID', 'int64'), ('amount', 'int32'), ('asset','int32'), ('salePrice', 'int32')]), delimiter=';', skiprows=1, usecols = (1,4))
+54 : D01 = loadtxt('D01', delimiter=';', skiprows=1, usecols = (1,4))
+55 : D01
+56 : D02 = loadtxt('D01', delimiter=';', skiprows=1, usecols = (1,4))
+57 : D01 = loadtxt('D01', delimiter=';', skiprows=1, usecols = (1,4))
+58 : D02 = loadtxt('D02', delimiter=';', skiprows=1, usecols = (1,4))
+59 : D11 = loadtxt('D11', delimiter=';', skiprows=1, usecols = (1,4))
+60 : D12 = loadtxt('D12', delimiter=';', skiprows=1, usecols = (1,4))
+61 : _ip.magic("hist ")
+62 : ind = 0
+63 : userDict
+65 : for data in [D01, D02, D11, D12]:
+66 :     for u in data[:,0]:
+67 :         userDict[u] = ind
+69 : userDict = {}
+70 : ind = 0
+71 : for data in [D01, D02, D11, D12]:
+72 :     for u in data[:,0]:
+73 :         userDict[u] = ind
+74 :         ind+=1
+75 : userDict
+76 : userDict.size
+77 : len(userDict.keys())
+78 : ind = 0
+79 : for data in [D01, D02, D11, D12]:
+80 :     for u in data[:,1]:
+81 :         itemDict[u] = ind
+82 :         ind+=1
+84 : UI = zeros((len(userDict.keys()), len(itemDict.keys())))
+85 : UI
+86 : UI.shape
+90 : userDict[1862263]
+91 : _ip.magic("hist ")
+92 : _ip.magic("hist -n")
+93 : userDict = {}
+94 : ind = 0
+96 : userDict
+97 : userDict = {}
+98 : ind = 0
+99 : for data in [D01, D02, D11, D12]:
+100:     for u in data[:,0]:
+101:         userDict[int(u)] = ind
+102:         ind+=1
+103: userDict
+104: for data in [D01, D02, D11, D12]:
+105:     for u in data[:,0]:
+107: _ip.magic("hist ")
+108: _ip.magic("hist -n")
+109: userDict = {}
+110: ind = 0
+112: userDict
+113: _ip.magic("hist -n")
+114: _ip.magic("hist ")
+115: _ip.magic("hist ")
+116: _ip.magic("hist -h")
+117: _ip.magic("hist -g")
