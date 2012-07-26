@@ -450,6 +450,49 @@ def RWWR(alpha, sim, nbBasket, nbReco):
 	#evalRWWR.savePerf(resultFolder+'RWWR_a%s_nb%s'%(alpha, nbBasket))
 	return evalRWWR
 
+def BRWWR(alpha, theta, nbBasket, nbReco):
+	
+	data = load()
+	#data = cvTaFengProcessing()
+	###############################################################
+	# CREATE MODELS
+	###############################################################
+	print 'Create the model based on the training set'
+	
+	modelBRWWR = processing.BRWWR(data.getUserItemMatrix(), theta, alpha)
+	modelBRWWR.train()
+	###############################################################
+	# SET RECOMMENDATION
+	###############################################################
+	if nbBasket == -1:
+		evalBRWWR = processing.Evaluation(modelBRWWR, data.getBasketItemList(), nbReco)
+	else :
+		evalBRWWR = processing.Evaluation(modelBRWWR, data.getBasketItemList()[:nbBasket], nbReco)
+	
+	###############################################################
+	# LAUNCH RECOMMENDATION + SAVE RESULTS
+	###############################################################	
+	t = time.time()
+	evalBRWWR.newEval()
+	BRWWRTime = time.time()-t
+	mmwrite(resultFolder+'BRWWR_a%s_nb%s'%(alpha, nbBasket),evalBRWWR.perf) 
+	
+	print 'BRWWR Execution time:', BRWWRTime
+	print 'Performances :'
+	print evalBRWWR.testNames
+	print evalBRWWR.computePerf()
+	
+	BRWWRPerf = dict()
+	for performance in evalBRWWR.testNames: 
+		BRWWRPerf[(performance, modelBRWWR.alpha)] = evalBRWWR.meanPerf[[i for i,j in enumerate(evalBRWWR.testNames) if j==performance]][0]
+	print 'Writing Baskets to file'
+	file = open(resultFolder+'BRWWRPerf_a%s_sim%s_nb%s_nr%s.txt'%(alpha, nbBasket,nbReco),'w')
+	pickle.dump(BRWWRPerf, file)
+	file.close() 
+	
+	#evalRWWR.savePerf(resultFolder+'RWWR_a%s_nb%s'%(alpha, nbBasket))
+	return evalBRWWR
+
 def pLSA(Z, nbBasket, nbReco):
 	data = load()
 	###############################################################

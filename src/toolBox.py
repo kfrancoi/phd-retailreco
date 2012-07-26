@@ -178,4 +178,19 @@ def idf(X):
 		for i in xrange(idf.shape[0]):
 				idf[i] = log( X.shape[0] / X[where(X[:,i]!=0),i].shape[1])
 		return idf
+
+def BRWWR_Comp(Pref, C, theta):
+	'''Computation of the Biaised transition probability matrix'''
+	
+	P = zeros(Pref.shape)
+	
+	W = array(exp(-theta * matrix(C)))*Pref
+	
+	[Dr, Vr] = linalg.eig(W)
+	
+	for i in xrange(Pref.shape[0]):
+		for j in xrange(Pref.shape[1]):
+			P[i,j] =  (Vr[j,0] * W[i,j]) / sum( Vr[:,0] * transpose(W[i,:]) )
+	
+	return P
 	
