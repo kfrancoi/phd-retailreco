@@ -22,7 +22,7 @@ import getopt
 
 import visualization
 
-from IPython.Debugger import Tracer
+#from IPython.Debugger import Tracer
 from numpy.core.numeric import zeros_like
 
 #debug_here = Tracer()
