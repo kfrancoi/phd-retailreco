@@ -459,7 +459,7 @@ def BRWWR(alpha, theta, nbBasket, nbReco):
 	###############################################################
 	print 'Create the model based on the training set'
 	
-	modelBRWWR = processing.BRWWR(data.getUserItemMatrix(), theta, alpha)
+	modelBRWWR = processing.BiasedRandomWalkWithRestartRecoModel(data.getUserItemMatrix(), theta, alpha)
 	modelBRWWR.train()
 	###############################################################
 	# SET RECOMMENDATION
