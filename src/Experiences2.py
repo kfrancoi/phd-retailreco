@@ -584,6 +584,48 @@ def Pop(nbBasket, nbReco):
 data = load()
 baseProcessing = processing.RecoModel(data.getUserItemMatrix())
 
+def Multi_BRWWR():
+	
+	alpha_theta = [(0.9, 0)]
+	nbBasket = 100
+	nbReco = 3
+
+	for alpha, theta in alpha_theta:
+		print '###############################################################'
+		print '# Start Recommendation with alpha : %s,  and theta : %s'%(alpha, theta)
+		print '###############################################################'
+		modelBRWWR = processing.BiasedRandomWalkWithRestartRecoModel(baseProcessing, theta, alpha)	
+		modelBRWWR.train()
+		###############################################################
+		# SET RECOMMENDATION
+		###############################################################
+		if nbBasket == -1:
+			evalBRWWR = processing.Evaluation(modelBRWWR, data.getBasketItemList(), nbReco)
+		else :
+			evalBRWWR = processing.Evaluation(modelBRWWR, data.getBasketItemList()[:nbBasket], nbReco)
+		
+		###############################################################
+		# LAUNCH RECOMMENDATION + SAVE RESULTS
+		###############################################################	
+		t = time.time()
+		evalBRWWR.newEval()
+		BRWWRTime = time.time()-t
+		mmwrite(resultFolder+'BRWWR_a%s_t%s_nb%s'%(alpha, theta, nbBasket),evalBRWWR.perf) 
+		
+		print 'RWWR Execution time:', BRWWRTime
+		print 'Performances :'
+		print evalBRWWR.testNames
+		print evalBRWWR.computePerf()
+		
+		BRWWRPerf = dict()
+		for performance in evalBRWWR.testNames: 
+			BRWWRPerf[(performance, modelBRWWR.alpha, modelRWWR.theta)] = evalBRWWR.meanPerf[[i for i,j in enumerate(evalBRWWR.testNames) if j==performance]][0]
+		print 'Writing Baskets to file'
+		file = open(resultFolder+'BRWWRPerf_a%s_t%s_nb%s_nr%s.txt'%(alpha,theta, nbBasket,nbReco),'w')
+		pickle.dump(BRWWRPerf, file)
+		file.close() 
+	
+
 def Multi_RW():
 	a = [0.01, 0.05, 0.1, 0.5, 0.8, 0.9]
 	sim = 'bn'

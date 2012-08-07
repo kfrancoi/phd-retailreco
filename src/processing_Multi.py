@@ -991,58 +991,58 @@ class BiasedRandomWalkWithRestartRecoModel():
 		self.Pref = toolBox.AtoP(self.Sim)
 		self.P = toolBox.BRWWR_Comp(self.Pref, ones(self.Pref.shape), self.theta)
 		print "Training done!"
-		print self.P
+		#print self.P
 		#Call BRWWR
 		
-		#Method RW
-		diff = 1000
-		epsilon = 0.00001
-		d = self.alpha
-		R = matrix(zeros((self.nbItems, self.nbItems)), dtype=float64)
-		U = matrix(eye(self.nbItems, self.nbItems,dtype=float64))
-		#count = 20
-		print 'Convergence ...'
-		while (diff > epsilon) :#and (count > 0):
-			sys.stdout.write('.')
-			oldRSum= sum(R)
-			R = d*self.P*R + (1-d)*U
-			diff = abs(oldRSum - sum(R)) / sum(R)
-			#count-=1
-			print diff
-		
-		#for i in arange(R.shape[0]):
-		#	R[i,i] = 1
-		print R
-		print sum(R,0)
-		self.R = array(R)
+#		#Method RW
+#		diff = 1000
+#		epsilon = 0.00001
+#		d = self.alpha
+#		R = matrix(zeros((self.nbItems, self.nbItems)), dtype=float64)
+#		U = matrix(eye(self.nbItems, self.nbItems,dtype=float64))
+#		#count = 20
+#		print 'Convergence ...'
+#		while (diff > epsilon) :#and (count > 0):
+#			sys.stdout.write('.')
+#			oldRSum= sum(R)
+#			R = d*self.P*R + (1-d)*U
+#			diff = abs(oldRSum - sum(R)) / sum(R)
+#			#count-=1
+#			print diff
+#		
+#		#for i in arange(R.shape[0]):
+#		#	R[i,i] = 1
+#		print R
+#		print sum(R,0)
+#		self.R = array(R)
 
-	def recommend(self, evidences, n):
-		self.scores = sum(self.R[:, evidences],1)
-		self.scores[evidences] = 0
-		
-		ind = argsort(self.scores)
-		
-		if n == -1:
-			return ind
-		else:
-			return ind[-n:] #Return the n largest scores
-			
 #	def recommend(self, evidences, n):
+#		self.scores = sum(self.R[:, evidences],1)
+#		self.scores[evidences] = 0
 #		
-#		I = eye(self.nbItems)
-#		u = zeros(self.nbItems)
-#		u[evidences] = 1 #1/nbEvidences ???
-#		try:
-#			#(I-dP) R = (1-d) u or U
-#			r = spLinalg.cgs(I-(self.alpha * self.P),(1-self.alpha)*u)
-#		except linalg.LinAlgError:
-#			print 'Linear Algebra Error'
-#			raise linalg.LinAlgError
+#		ind = argsort(self.scores)
 #		
-#		r[0][evidences] = 0
-#		ind = argsort(r[0]) #Item with highest scores are recommended
-#		
-#		return ind[-n:]
+#		if n == -1:
+#			return ind
+#		else:
+#			return ind[-n:] #Return the n largest scores
+			
+	def recommend(self, evidences, n):
+		
+		I = eye(self.nbItems)
+		u = zeros(self.nbItems)
+		u[evidences] = 1 #1/nbEvidences ???
+		try:
+			#(I-dP) R = (1-d) u or U
+			r = spLinalg.cgs(I-(self.alpha * self.P),(1-self.alpha)*u)
+		except linalg.LinAlgError:
+			print 'Linear Algebra Error'
+			raise linalg.LinAlgError
+		
+		r[0][evidences] = 0
+		ind = argsort(r[0]) #Item with highest scores are recommended
+		
+		return ind[-n:]
 
 class PLSARecoModel():
 	
