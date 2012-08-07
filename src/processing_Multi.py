@@ -971,7 +971,7 @@ class BiasedRandomWalkWithRestartRecoModel():
 	Biaised Random Walk With Restart
 	'''
 	
-	def __init__(self, UI, theta, alpha, sim=None):
+	def __init__(self, recoUI, theta, alpha, sim=None):
 		self.UI = recoUI.UI
 		self.theta = theta
 		self.alpha = alpha
