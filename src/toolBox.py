@@ -122,9 +122,9 @@ def AtoP(A):
 	A = array(A)
 	s = sum(array(A),1)
 	n = A.shape[0]
-	e = ones(n)
-	#P = A / (matrix(s)*matrix(e))
-	P = A*1.0 / s
+	e = ones((1,n))
+	P = A*1.0 / (matrix(s).T*matrix(e))
+	#P = A*1.0 / s
 	for i in arange(P.shape[0]):
 		P[i,i] = 0
 	return P
