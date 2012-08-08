@@ -947,7 +947,7 @@ class RandomWalkWithRestartRecoModel():
 			self.P = toolBox.AtoP(self.Sim)
 		if (self.sim == 'bn'):
 			self.P = toolBox.transitionProbability(self.UI)
-			
+		print self.P
 	
 	def recommend(self, evidences, n):
 		
@@ -992,7 +992,7 @@ class BiasedRandomWalkWithRestartRecoModel():
 		#self.Pref = toolBox.AtoP(self.Sim)
 		self.P = toolBox.BRWWR_Comp(self.Pref, ones(self.Pref.shape), self.theta)
 		print "Training done!"
-		#print self.P
+		print self.P
 		#Call BRWWR
 		
 #		#Method RW

@@ -587,7 +587,7 @@ baseProcessing = processing.RecoModel(data.getUserItemMatrix())
 def Multi_BRWWR():
 	
 	alpha_theta = [(0.9, 0)]
-	nbBasket = 100
+	nbBasket = 400
 	nbReco = 3
 
 	for alpha, theta in alpha_theta:
@@ -619,7 +619,7 @@ def Multi_BRWWR():
 		
 		BRWWRPerf = dict()
 		for performance in evalBRWWR.testNames: 
-			BRWWRPerf[(performance, modelBRWWR.alpha, modelRWWR.theta)] = evalBRWWR.meanPerf[[i for i,j in enumerate(evalBRWWR.testNames) if j==performance]][0]
+			BRWWRPerf[(performance, modelBRWWR.alpha, modelBRWWR.theta)] = evalBRWWR.meanPerf[[i for i,j in enumerate(evalBRWWR.testNames) if j==performance]][0]
 		print 'Writing Baskets to file'
 		file = open(resultFolder+'BRWWRPerf_a%s_t%s_nb%s_nr%s.txt'%(alpha,theta, nbBasket,nbReco),'w')
 		pickle.dump(BRWWRPerf, file)
@@ -627,7 +627,8 @@ def Multi_BRWWR():
 	
 
 def Multi_RW():
-	a = [0.01, 0.05, 0.1, 0.5, 0.8, 0.9]
+	#a = [0.01, 0.05, 0.1, 0.5, 0.8, 0.9]
+	a= [0.9]
 	sim = 'bn'
 	nbBasket = 400
 	nbReco = 3

@@ -123,10 +123,10 @@ def AtoP(A):
 	s = sum(array(A),1)
 	n = A.shape[0]
 	e = ones((1,n))
-	P = A*1.0 / array(matrix(s).T*matrix(e)))
+	P = A*1.0 / array(matrix(s).T*matrix(e))
 	#P = A*1.0 / s
-	for i in arange(P.shape[0]):
-		P[i,i] = 0
+	#for i in arange(P.shape[0]):
+	#	P[i,i] = 0
 	return P
 
 def standardizeColumns(X) :
