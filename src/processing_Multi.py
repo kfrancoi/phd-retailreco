@@ -987,8 +987,9 @@ class BiasedRandomWalkWithRestartRecoModel():
 	
 	def train(self):
 		print "Start training..."
-		self.Sim = toolBox.cosineSimilarity(self.UI)
-		self.Pref = toolBox.AtoP(self.Sim)
+		self.Pref = toolBox.transitionProbability(self.UI)
+		#self.Sim = toolBox.cosineSimilarity(self.UI)
+		#self.Pref = toolBox.AtoP(self.Sim)
 		self.P = toolBox.BRWWR_Comp(self.Pref, ones(self.Pref.shape), self.theta)
 		print "Training done!"
 		#print self.P
