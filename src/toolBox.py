@@ -124,7 +124,7 @@ def AtoP(A):
 	n = A.shape[0]
 	e = ones(n)
 	#P = A / (matrix(s)*matrix(e))
-	P = A / s
+	P = A*1.0 / s
 	for i in arange(P.shape[0]):
 		P[i,i] = 0
 	return P
