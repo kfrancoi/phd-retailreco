@@ -586,7 +586,7 @@ baseProcessing = processing.RecoModel(data.getUserItemMatrix())
 
 def Multi_BRWWR():
 	
-	alpha_theta = [(0.9, 0)]
+	alpha_theta = [(0.9, 0), (0.5, 0)]
 	nbBasket = 400
 	nbReco = 3
 
