@@ -586,8 +586,11 @@ baseProcessing = processing.RecoModel(data.getUserItemMatrix())
 
 def Multi_BRWWR():
 	
-	alpha_theta = [(0.9, 0), (0.5, 0)]
-	nbBasket = 400
+	alpha_theta = [(0.9, 0), (0.8, 0), (0.5, 0), (0.2, 0), (0.1, 0),
+					(0.9, 1), (0.8, 1), (0.5, 1), (0.2, 1), (0.1, 1),
+					(0.9, 0.1), (0.8,0.1), (0.5,0.1), (0.2,0.1), (0.1, 0.1),
+					(0.9, 0.01), (0.8,0.01), (0.5,0.01), (0.2,0.01), (0.1, 0.01)]
+	nbBasket = 5000
 	nbReco = 3
 
 	for alpha, theta in alpha_theta:
@@ -612,7 +615,7 @@ def Multi_BRWWR():
 		BRWWRTime = time.time()-t
 		mmwrite(resultFolder+'BRWWR_a%s_t%s_nb%s'%(alpha, theta, nbBasket),evalBRWWR.perf) 
 		
-		print 'RWWR Execution time:', BRWWRTime
+		print 'BRWWR Execution time:', BRWWRTime
 		print 'Performances :'
 		print evalBRWWR.testNames
 		print evalBRWWR.computePerf()
