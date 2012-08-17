@@ -630,10 +630,10 @@ def Multi_BRWWR():
 	
 
 def Multi_RW():
-	#a = [0.01, 0.05, 0.1, 0.5, 0.8, 0.9]
-	a= [0.9]
+	a = [0.01, 0.05, 0.1, 0.5, 0.8, 0.9]
+	#a= [0.9]
 	sim = 'bn'
-	nbBasket = 400
+	nbBasket = 5000
 	nbReco = 3
 	
 	for alpha in a:
