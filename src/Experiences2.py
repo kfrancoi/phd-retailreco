@@ -672,7 +672,7 @@ def Multi_RW():
 		file.close() 
 	
 def Multi_Cosine():
-	nbBasket = 400
+	nbBasket = 5000
 	nbReco = 3
 	modelCosine = processing.CosineRecoModel(baseProcessing)
 
