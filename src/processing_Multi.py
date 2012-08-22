@@ -972,7 +972,7 @@ class BiasedRandomWalkWithRestartRecoModel():
 	Biaised Random Walk With Restart
 	'''
 	
-	def __init__(self, recoUI, theta, alpha, sim=None):
+	def __init__(self, recoUI, theta, alpha, sim='bn'):
 		self.UI = recoUI.UI
 		self.theta = theta
 		self.alpha = alpha
@@ -1217,7 +1217,7 @@ class Evaluation:
 		file.write('%s\n'%self.model)
 		file.write('%s\n'%self.testNames)
 		file.write('%s\n'%self.meanPerf)
-		file.close()
+		file.close() 
 	
 	def writeRecomendation(self, recoList, basketDict, itemDict, fname):
 		'''
