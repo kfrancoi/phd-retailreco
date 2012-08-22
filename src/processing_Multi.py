@@ -991,7 +991,7 @@ class BiasedRandomWalkWithRestartRecoModel():
 		
 		#self.Cost = repeat(reshape(self.ItemPrior, (self.ItemPrior.shape[0],1)), self.ItemPrior.shape[0], axis=0)
 		self.Cost = repeat(reshape(self.ItemPrior, (1,self.ItemPrior.shape[0])), self.ItemPrior.shape[0], axis=0)
-		
+		print self.Cost.shape
 		if (self.sim == 'cos'):
 			self.Pref = toolBox.cosineSimilarity(self.UI)
 		if (self.sim == 'bn'):
