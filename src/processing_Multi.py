@@ -592,6 +592,7 @@ class CosineRecoModel():
 		self.Sim = array(toolBox.cosineSimilarity(self.UI))
 	
 	def recommend(self, evidences, n):
+			
 		self.scores = sum(self.Sim[evidences, :],0)
 		self.scores[evidences] = 0
 		
@@ -947,7 +948,7 @@ class RandomWalkWithRestartRecoModel():
 			self.P = toolBox.AtoP(self.Sim)
 		if (self.sim == 'bn'):
 			self.P = toolBox.transitionProbability(self.UI)
-		print self.P
+		#print self.P
 	
 	def recommend(self, evidences, n):
 		
@@ -988,15 +989,16 @@ class BiasedRandomWalkWithRestartRecoModel():
 	def train(self):
 		print "Start training..."
 		
-		Cost = repeat(reshape(self.ItemPrior, (self.ItemPrior.shape[0],1)), self.ItemPrior.shape[0], axis=1)
+		#self.Cost = repeat(reshape(self.ItemPrior, (self.ItemPrior.shape[0],1)), self.ItemPrior.shape[0], axis=0)
+		self.Cost = repeat(reshape(self.ItemPrior, (1,self.ItemPrior.shape[0])), self.ItemPrior.shape[0], axis=0)
 		
-		self.Pref = toolBox.transitionProbability(self.UI)
-		#self.Sim = toolBox.cosineSimilarity(self.UI)
+		#self.Pref = toolBox.transitionProbability(self.UI)
+		self.Pref = toolBox.cosineSimilarity(self.UI)
 		#self.Pref = toolBox.AtoP(self.Sim)
 		#self.P = toolBox.BRWWR_Comp(self.Pref, ones(self.Pref.shape), self.theta)
-		self.P = toolBox.BRWWR_Comp(self.Pref, Cost, self.theta)
-		print "Training done!"
-		print self.P
+		self.P = toolBox.BRWWR_Comp(self.Pref, self.Cost, self.theta)
+		#print "Training done!"
+		#print self.P
 		#Call BRWWR
 		
 #		#Method RW
@@ -1192,7 +1194,7 @@ class Evaluation:
 				print 'Performances so far: '
 				print self.testNames
 				print self.computePerf()
-			if len(self.evidenceBaskets[basket]) >=4 :
+			if True :#len(self.evidenceBaskets[basket]) >=4 :
 				for test in arange(len(self.testNames)):
 					self.perf[basket,test] = getattr(self, self.testNames[test])(self.evidenceBaskets[basket])
 			else:
