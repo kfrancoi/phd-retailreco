@@ -1197,7 +1197,7 @@ class Evaluation:
 				print 'Performances so far: '
 				print self.testNames
 				print self.computePerf()
-			if True :#len(self.evidenceBaskets[basket]) >=4 :
+			if len(self.evidenceBaskets[basket]) >=4 :
 				for test in arange(len(self.testNames)):
 					self.perf[basket,test] = getattr(self, self.testNames[test])(self.evidenceBaskets[basket])
 			else:
