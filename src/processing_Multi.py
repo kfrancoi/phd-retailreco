@@ -992,8 +992,11 @@ class BiasedRandomWalkWithRestartRecoModel():
 		#self.Cost = repeat(reshape(self.ItemPrior, (self.ItemPrior.shape[0],1)), self.ItemPrior.shape[0], axis=0)
 		self.Cost = repeat(reshape(self.ItemPrior, (1,self.ItemPrior.shape[0])), self.ItemPrior.shape[0], axis=0)
 		
-		#self.Pref = toolBox.transitionProbability(self.UI)
-		self.Pref = toolBox.cosineSimilarity(self.UI)
+		if (self.sim == 'cos'):
+			self.Pref = toolBox.cosineSimilarity(self.UI)
+		if (self.sim == 'bn'):
+			self.Pref = toolBox.transitionProbability(self.UI)
+		
 		#self.Pref = toolBox.AtoP(self.Sim)
 		#self.P = toolBox.BRWWR_Comp(self.Pref, ones(self.Pref.shape), self.theta)
 		self.P = toolBox.BRWWR_Comp(self.Pref, self.Cost, self.theta)

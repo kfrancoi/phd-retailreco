@@ -600,13 +600,14 @@ def Multi_BRWWR():
 					(0.9, 0.1), (0.8,0.1), (0.5,0.1), (0.2,0.1), (0.1, 0.1),
 					(0.9, 0.01), (0.8,0.01), (0.5,0.01), (0.2,0.01), (0.1, 0.01)]
 	nbBasket = 10000
+	sim = 'cos'
 	nbReco = 3
 
 	for alpha, theta in alpha_theta:
 		print '###############################################################'
 		print '# Start Recommendation with alpha : %s,  and theta : %s'%(alpha, theta)
 		print '###############################################################'
-		modelBRWWR = processing.BiasedRandomWalkWithRestartRecoModel(baseProcessing, theta, alpha)	
+		modelBRWWR = processing.BiasedRandomWalkWithRestartRecoModel(baseProcessing, theta, alpha, sim)	
 		modelBRWWR.train()
 		###############################################################
 		# SET RECOMMENDATION
@@ -641,9 +642,9 @@ def Multi_BRWWR():
 def Multi_RW():
 	a = [0.01, 0.05, 0.1, 0.5, 0.8, 0.9]
 	#a= [0.9]
-	sim = 'bn'
-	nbBasket = -1
-	nbReco = 1
+	sim = 'cos'
+	nbBasket = 10000
+	nbReco = 3
 	
 	for alpha in a:
 		print '###############################################################'
@@ -681,8 +682,8 @@ def Multi_RW():
 		file.close() 
 	
 def Multi_Cosine():
-	nbBasket = -1
-	nbReco = 1
+	nbBasket = 10000
+	nbReco = 3
 	modelCosine = processing.CosineRecoModel(baseProcessing)
 
 	###############################################################
