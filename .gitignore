@@ -28,5 +28,5 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-src/distance.c
-src/distance.so
+distance.c
+distance.so
