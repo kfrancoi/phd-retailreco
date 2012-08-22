@@ -70,15 +70,24 @@ def loadToy():
 			[1,1,0,1,0,0],
 			[1,1,0,0,1,0],
 			[1,0,1,1,0,0],
-			[1,1,0,0,0,1],
+			[1,1,1,0,0,0],
 			[1,0,1,0,0,0],
+			[1,1,0,1,0,0],
+			[1,1,0,0,1,0],
+			[1,0,1,1,0,0],
+			[1,1,1,0,0,1],
+			[0,0,1,1,0,1],
 			], dtype='float')
 	
 	data.UI = UI
 	
 	data.BasketItemList = list()
 	
-	data.BasketItemList.append(array([1,2]))
+	data.BasketItemList.append(array([0,1,3]))
+	data.BasketItemList.append(array([0,1,4]))
+	data.BasketItemList.append(array([0,2]))
+	data.BasketItemList.append(array([0,1,4]))
+	data.BasketItemList.append(array([2,3,4]))
 	
 	return data
 	
@@ -581,7 +590,7 @@ def Pop(nbBasket, nbReco):
 
 
 
-data = load()
+data = loadToy()
 baseProcessing = processing.RecoModel(data.getUserItemMatrix())
 
 def Multi_BRWWR():
@@ -590,14 +599,15 @@ def Multi_BRWWR():
 					(0.9, 1), (0.8, 1), (0.5, 1), (0.2, 1), (0.1, 1),
 					(0.9, 0.1), (0.8,0.1), (0.5,0.1), (0.2,0.1), (0.1, 0.1),
 					(0.9, 0.01), (0.8,0.01), (0.5,0.01), (0.2,0.01), (0.1, 0.01)]
-	nbBasket = 5000
+	nbBasket = 10000
+	sim = 'cos'
 	nbReco = 3
 
 	for alpha, theta in alpha_theta:
 		print '###############################################################'
 		print '# Start Recommendation with alpha : %s,  and theta : %s'%(alpha, theta)
 		print '###############################################################'
-		modelBRWWR = processing.BiasedRandomWalkWithRestartRecoModel(baseProcessing, theta, alpha)	
+		modelBRWWR = processing.BiasedRandomWalkWithRestartRecoModel(baseProcessing, theta, alpha, sim)	
 		modelBRWWR.train()
 		###############################################################
 		# SET RECOMMENDATION
@@ -632,8 +642,8 @@ def Multi_BRWWR():
 def Multi_RW():
 	a = [0.01, 0.05, 0.1, 0.5, 0.8, 0.9]
 	#a= [0.9]
-	sim = 'bn'
-	nbBasket = 5000
+	sim = 'cos'
+	nbBasket = 10000
 	nbReco = 3
 	
 	for alpha in a:
@@ -672,7 +682,7 @@ def Multi_RW():
 		file.close() 
 	
 def Multi_Cosine():
-	nbBasket = 5000
+	nbBasket = 10000
 	nbReco = 3
 	modelCosine = processing.CosineRecoModel(baseProcessing)
 
@@ -704,4 +714,89 @@ def Multi_Cosine():
 	print evalCosine.testNames
 	print evalCosine.computePerf()
 	evalCosine.savePerf(resultFolder+'Cosine_nb%s.txt'%nbBasket)
+
+
+def drawSomeThing(model, nb='nb5000'):
+
+	expBRWWR = {}
+	expRWWR = {}
+	expCosine = {}
+
+	for dirname, dirnames, filenames in os.walk('../result'):
+		#for subdirname in dirnames:
+		#    print os.path.join(dirname, subdirname)
+		for filename in filenames:
+			filePath = os.path.join(dirname, filename)
+			if '/BRWWRPerf' in filePath and nb in filePath:
+				print filePath
+				tmpDict = pickle.load(open(filePath, 'r'))
+
+				for perf, a, t in tmpDict:
+					if perf in expBRWWR:
+						if a in expBRWWR[perf]:
+							expBRWWR[perf][a][t] = tmpDict[(perf, a, t)]
+						else :
+							expBRWWR[perf][a] = {t : tmpDict[(perf, a, t)]}
+					else :
+						expBRWWR[perf] = {a:{t:tmpDict[(perf, a, t)]}}
+
+			if '/RWWRPerf' in filePath and nb in filePath:
+				print filePath
+				tmpDict = pickle.load(open(filePath, 'r'))
+
+				for perf, a, sim in tmpDict:
+					if perf in expRWWR:
+						if a in expRWWR[perf]:
+							expRWWR[perf][a][sim] = tmpDict[(perf, a, sim)]
+						else :
+							expRWWR[perf][a] = {sim : tmpDict[(perf, a, sim)]}
+					else :
+						expRWWR[perf] = {a:{sim:tmpDict[(perf, a, sim)]}}
+
+			if '/CosinePerf' in filePath and nb in filePath:
+				print filePath
+				tmpDict = pickle.load(open(filePath, 'r'))
+				for perf in tmpDict:
+					expCosine[perf] = tmpDict[perf]
+
+
+	plt.figure()
+	for n, forPerf in enumerate(['_perf_Novelty', '_perf_bHR_pop', '_perf_wHR', '_perf_bHR_rnd']):
+		plt.subplot(2,2,n)
+		for j in sort([t for t in expBRWWR[forPerf][0.1]]):
+			xData = []
+			yData = []
+			for i in sort([a for a in expBRWWR[forPerf]]):
+				xData.append(i)
+				yData.append(expBRWWR[forPerf][i][j])
+			plt.title("BRWWR for %s"%forPerf)
+			plt.xlabel("alpha")
+			plt.ylabel(forPerf)
+			plt.plot(xData, yData, label='t:%s'%(j))
+		#Baseline
+		plt.plot(xData, [expCosine[forPerf]]*len(xData), label='Cosine')
+		plt.legend()
+	plt.show()
+
+
+	plt.figure()
+	for n, forPerf in enumerate(['_perf_Novelty', '_perf_bHR_pop', '_perf_wHR', '_perf_bHR_rnd']):
+		plt.subplot(2,2,n)
+		for j in sort([sim for sim in expRWWR[forPerf][0.1]]):
+			xData = []
+			yData = []
+			for i in sort([a for a in expRWWR[forPerf]]):
+				xData.append(i)
+				yData.append(expRWWR[forPerf][i][j])
+			plt.title("RWWR for %s"%forPerf)
+			plt.xlabel("alpha")
+			plt.ylabel(forPerf)
+			plt.plot(xData, yData, label='Sim:%s'%(j))
+		#Baseline
+		plt.plot(xData, [expCosine[forPerf]]*len(xData), label='Cosine')
+		plt.legend()
+	plt.show()
+
+
+
 
