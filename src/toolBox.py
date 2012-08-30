@@ -184,7 +184,7 @@ def BRWWR_Comp(Pref, C, theta):
 	
 	P = zeros(Pref.shape)
 	
-	W = array(exp(-theta * matrix(C)))*Pref
+	W = array(exp(-theta * C))*array(Pref)
 	
 	#return W
 	[Dr, Vr] = linalg.eig(W)

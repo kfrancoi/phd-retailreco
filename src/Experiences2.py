@@ -590,7 +590,7 @@ def Pop(nbBasket, nbReco):
 
 
 
-data = load()
+data = loadToy()
 baseProcessing = processing.RecoModel(data.getUserItemMatrix())
 
 def Multi_BRWWR():
@@ -599,7 +599,7 @@ def Multi_BRWWR():
 					(0.9, 1), (0.8, 1), (0.5, 1), (0.2, 1), (0.1, 1),
 					(0.9, 0.1), (0.8,0.1), (0.5,0.1), (0.2,0.1), (0.1, 0.1),
 					(0.9, 0.01), (0.8,0.01), (0.5,0.01), (0.2,0.01), (0.1, 0.01)]
-	nbBasket = 10000
+	nbBasket = 5000
 	sim = 'cos'
 	nbReco = 3
 
