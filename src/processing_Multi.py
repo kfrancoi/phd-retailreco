@@ -1000,7 +1000,8 @@ class BiasedRandomWalkWithRestartRecoModel():
 		print self.Pref.shape
 		#self.Pref = toolBox.AtoP(self.Sim)
 		#self.P = toolBox.BRWWR_Comp(self.Pref, ones(self.Pref.shape), self.theta)
-		self.P = toolBox.BRWWR_Comp(self.Pref, self.Cost, self.theta)
+		#self.P = toolBox.BRWWR_Comp(self.Pref, self.Cost, self.theta)
+		self.P = self.Pref
 		#print "Training done!"
 		#print self.P
 		#Call BRWWR
