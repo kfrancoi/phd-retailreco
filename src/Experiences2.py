@@ -16,7 +16,7 @@ from scipy.io import mmwrite, mmread
 
 #from model import *
 dataFolder = '../data/'
-resultFolder = '../result/' 
+resultFolder = '../result2/' 
 
 #def toyNetwork():
 #	import Graph
