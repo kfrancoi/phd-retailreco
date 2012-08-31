@@ -998,7 +998,7 @@ class BiasedRandomWalkWithRestartRecoModel():
 		if (self.sim == 'bn'):
 			self.Pref = toolBox.transitionProbability(self.UI)
 		print self.Pref.shape
-		#self.Pref = toolBox.AtoP(self.Sim)
+		self.Pref = toolBox.AtoP(self.Sim)
 		#self.P = toolBox.BRWWR_Comp(self.Pref, ones(self.Pref.shape), self.theta)
 		#self.P = toolBox.BRWWR_Comp(self.Pref, self.Cost, self.theta)
 		self.P = self.Pref
