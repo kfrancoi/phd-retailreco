@@ -646,7 +646,7 @@ def Multi_RW():
 	a = [0.01, 0.05, 0.1, 0.5, 0.8, 0.9]
 	#a= [0.9]
 	sim = 'cos'
-	nbBasket = 10000
+	nbBasket = 5000
 	nbReco = 3
 	
 	for alpha in a:
@@ -685,7 +685,7 @@ def Multi_RW():
 		file.close() 
 	
 def Multi_Cosine():
-	nbBasket = 10000
+	nbBasket = 5000
 	nbReco = 3
 	modelCosine = processing.CosineRecoModel(baseProcessing)
 
