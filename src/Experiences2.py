@@ -16,7 +16,10 @@ from scipy.io import mmwrite, mmread
 
 #from model import *
 dataFolder = '../data/'
-resultFolder = '../result2/' 
+resultFolder = '../result/' 
+
+#result2 --> cos
+#result --> bn
 
 #def toyNetwork():
 #	import Graph
