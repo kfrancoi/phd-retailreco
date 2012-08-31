@@ -994,14 +994,14 @@ class BiasedRandomWalkWithRestartRecoModel():
 		print self.Cost.shape
 		
 		if (self.sim == 'cos'):
-			self.Pref = toolBox.cosineSimilarity(self.UI)
+			self.Sim = toolBox.cosineSimilarity(self.UI)
+			self.Pref = toolBox.AtoP(self.Sim)
 		if (self.sim == 'bn'):
 			self.Pref = toolBox.transitionProbability(self.UI)
-		print self.Pref.shape
-		self.Pref = toolBox.AtoP(self.Sim)
+		
 		#self.P = toolBox.BRWWR_Comp(self.Pref, ones(self.Pref.shape), self.theta)
-		#self.P = toolBox.BRWWR_Comp(self.Pref, self.Cost, self.theta)
-		self.P = self.Pref
+		self.P = toolBox.BRWWR_Comp(self.Pref, self.Cost, self.theta)
+		#self.P = self.Pref
 		#print "Training done!"
 		#print self.P
 		#Call BRWWR
