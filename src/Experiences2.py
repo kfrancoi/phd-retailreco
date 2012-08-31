@@ -18,8 +18,8 @@ from scipy.io import mmwrite, mmread
 dataFolder = '../data/'
 resultFolder = '../result/' 
 
-#result2 --> cos
-#result --> bn
+#result2 --> bn
+#result --> cos
 
 #def toyNetwork():
 #	import Graph
@@ -603,7 +603,7 @@ def Multi_BRWWR():
 					(0.9, 0.1), (0.8,0.1), (0.5,0.1), (0.2,0.1), (0.1, 0.1),
 					(0.9, 0.01), (0.8,0.01), (0.5,0.01), (0.2,0.01), (0.1, 0.01)]
 	nbBasket = 5000
-	sim = 'cos'
+	sim = 'bn'
 	nbReco = 3
 
 	for alpha, theta in alpha_theta:
