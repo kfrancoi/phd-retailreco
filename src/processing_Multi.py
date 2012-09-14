@@ -948,7 +948,7 @@ class RandomWalkWithRestartRecoModel():
 			self.P = toolBox.AtoP(self.Sim)
 		if (self.sim == 'bn'):
 			self.P = toolBox.transitionProbability(self.UI)
-		#print self.P
+		self.P = transpose(self.P)
 	
 	def recommend(self, evidences, n):
 		

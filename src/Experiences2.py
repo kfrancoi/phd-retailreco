@@ -593,8 +593,8 @@ def Pop(nbBasket, nbReco):
 
 
 
-data = load()
-baseProcessing = processing.RecoModel(data.getUserItemMatrix())
+#data = load()
+#baseProcessing = processing.RecoModel(data.getUserItemMatrix())
 
 def Multi_BRWWR():
 	
@@ -719,13 +719,49 @@ def Multi_Cosine():
 	evalCosine.savePerf(resultFolder+'Cosine_nb%s.txt'%nbBasket)
 
 
-def drawSomeThing(model, nb='nb5000'):
+def Multi_POP():
+	nbBasket = 5000
+	nbReco = 3
+	modelPop = processing.PopRecoModel(baseProcessing)
+
+	###############################################################
+	# SET RECOMMENDATION
+	###############################################################
+	if nbBasket == -1:
+		evalPop = processing.Evaluation(modelPop, data.getBasketItemList(), nbReco)
+	else :
+		evalPop = processing.Evaluation(modelPop, data.getBasketItemList()[:nbBasket], nbReco)	
+	###############################################################
+	# LAUNCH RECOMMENDATION + SAVE RESULTS
+	###############################################################	
+	t = time.time()
+	evalPop.newEval()
+	PopTime = time.time()-t
+	mmwrite(resultFolder+'Pop_nb%s'%nbBasket,evalPop.perf) 
+	
+	PopPerf = dict()
+	for performance in evalPop.testNames: 
+		PopPerf[performance] = evalPop.meanPerf[[i for i,j in enumerate(evalPop.testNames) if j==performance]][0]
+	print 'Writing Baskets to file'
+	fileToWrite = open(resultFolder+'PopPerf_nb%s_nr%s.txt'%(nbBasket,nbReco),'w')
+	pickle.dump(PopPerf, fileToWrite)
+	fileToWrite.close()  
+	
+	print 'Pop Execution time:', PopTime
+	print 'Performances :'
+	print evalPop.testNames
+	print evalPop.computePerf()
+	evalPop.savePerf(resultFolder+'Pop_nb%s.txt'%nbBasket)
+
+
+def drawSomeThing(nb='nb5000'):
 
 	expBRWWR = {}
 	expRWWR = {}
 	expCosine = {}
+	expPop = {}
 
-	for dirname, dirnames, filenames in os.walk('../result'):
+	for dirname, dirnames, filenames in os.walk('../result2'):
 		#for subdirname in dirnames:
 		#    print os.path.join(dirname, subdirname)
 		for filename in filenames:
@@ -756,6 +792,12 @@ def drawSomeThing(model, nb='nb5000'):
 					else :
 						expRWWR[perf] = {a:{sim:tmpDict[(perf, a, sim)]}}
 
+			if '/PopPerf' in filePath and nb in filePath:
+				print filePath
+				tmpDict = pickle.load(open(filePath, 'r'))
+				for perf in tmpDict:
+					expPop[perf] = tmpDict[perf]
+			
 			if '/CosinePerf' in filePath and nb in filePath:
 				print filePath
 				tmpDict = pickle.load(open(filePath, 'r'))
@@ -778,6 +820,7 @@ def drawSomeThing(model, nb='nb5000'):
 			plt.plot(xData, yData, label='t:%s'%(j))
 		#Baseline
 		plt.plot(xData, [expCosine[forPerf]]*len(xData), label='Cosine')
+		plt.plot(xData, [expPop[forPerf]]*len(xData), label='Pop')
 		plt.legend()
 	plt.show()
 
@@ -797,6 +840,7 @@ def drawSomeThing(model, nb='nb5000'):
 			plt.plot(xData, yData, label='Sim:%s'%(j))
 		#Baseline
 		plt.plot(xData, [expCosine[forPerf]]*len(xData), label='Cosine')
+		plt.plot(xData, [expPop[forPerf]]*len(xData), label='Pop')
 		plt.legend()
 	plt.show()
 
