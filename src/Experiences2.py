@@ -593,8 +593,8 @@ def Pop(nbBasket, nbReco):
 
 
 
-#data = load()
-#baseProcessing = processing.RecoModel(data.getUserItemMatrix())
+data = load()
+baseProcessing = processing.RecoModel(data.getUserItemMatrix())
 
 def Multi_BRWWR():
 	
