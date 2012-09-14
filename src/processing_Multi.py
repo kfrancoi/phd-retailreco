@@ -1001,6 +1001,9 @@ class BiasedRandomWalkWithRestartRecoModel():
 		
 		#self.P = toolBox.BRWWR_Comp(self.Pref, ones(self.Pref.shape), self.theta)
 		self.P = toolBox.BRWWR_Comp(self.Pref, self.Cost, self.theta)
+		
+		#Transpose P to get a correct random walk with restart
+		self.P = transpose(self.P)
 		#self.P = self.Pref
 		#print "Training done!"
 		#print self.P
