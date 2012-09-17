@@ -23,7 +23,7 @@ NNNI-1
 I-1
 I0
 tp9
-bS'\xd1u\xc0\xc9\xda\xa8\xe3?'
+bS' \x8f\x0fR\x8c~\xde?'
 p10
 tp11
 Rp12
@@ -34,7 +34,7 @@ F0.01
 tp14
 g3
 (g7
-S'\xc5\x8f1w-!o?'
+S'\xa5N@\x13a\xc3\xc3?'
 p15
 tp16
 Rp17
@@ -45,7 +45,7 @@ F0.01
 tp19
 g3
 (g7
-S'{\x14\xaeG\xe1zt?'
+S'lxz\xa5,C\xbc?'
 p20
 tp21
 Rp22
@@ -56,7 +56,7 @@ F0.01
 tp24
 g3
 (g7
-S'=I\x11#\xc8\x7fX?'
+S'\x89\x8a\xcc_\xac\xe1\xae?'
 p25
 tp26
 Rp27
