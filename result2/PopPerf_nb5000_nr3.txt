@@ -28,7 +28,7 @@ sS'_perf_bHR_rnd'
 p12
 g2
 (g6
-S'(~\x8c\xb9k\t\xb9?'
+S'\x17HP\xfc\x18s\xb7?'
 p13
 tp14
 Rp15
