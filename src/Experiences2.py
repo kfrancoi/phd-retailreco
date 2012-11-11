@@ -596,15 +596,15 @@ def Pop(nbBasket, nbReco):
 data = load()
 baseProcessing = processing.RecoModel(data.getUserItemMatrix())
 
-def Multi_BRWWR():
+def Multi_BRWWR(nbBasket, sim, nbReco):
 	
 	alpha_theta = [(0.9, 0), (0.8, 0), (0.5, 0), (0.2, 0), (0.1, 0),
 					(0.9, 1), (0.8, 1), (0.5, 1), (0.2, 1), (0.1, 1),
 					(0.9, 0.1), (0.8,0.1), (0.5,0.1), (0.2,0.1), (0.1, 0.1),
 					(0.9, 0.01), (0.8,0.01), (0.5,0.01), (0.2,0.01), (0.1, 0.01)]
-	nbBasket = 10000
-	sim = 'cos'
-	nbReco = 3
+	#nbBasket = 10000
+	#sim = 'cos'
+	#nbReco = 3
 	for alpha in [ pow(10,i) for i in [-2, -1.5, -1, -0.5, 0] ]:
 		for theta in [0.01, 0.05, 0.1, 0.5, 1, 3, 10]:
 
