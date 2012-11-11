@@ -1,3 +1,0 @@
-<CosineRecoModel>
-['_perf_Novelty', '_perf_bHR_pop', '_perf_bHR_rnd', '_perf_wHR']
-[ 0.58801419  0.095       0.185       0.07119212]
