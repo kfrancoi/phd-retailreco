@@ -685,7 +685,7 @@ def Multi_RW(nbBasket, sim, nbReco):
 		pickle.dump(RWWRPerf, file)
 		file.close() 
 	
-def Multi_Cosine(nbBacsket, nbReco):
+def Multi_Cosine(nbBasket, nbReco):
 	#nbBasket = -1
 	#nbReco = 3
 	modelCosine = processing.CosineRecoModel(baseProcessing)
