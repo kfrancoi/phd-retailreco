@@ -46,7 +46,7 @@ g2
 tp20
 g4
 (g8
-S'\xa1\xef>2l\xa3\xde?'
+S'\xe7eY8l\xa3\xde?'
 p21
 tp22
 Rp23
@@ -57,7 +57,7 @@ g2
 tp25
 g4
 (g8
-S'<N\xd1\x91\\\xfe\xc3?'
+S'\x12\xa5\xbd\xc1\x17&\xc3?'
 p26
 tp27
 Rp28

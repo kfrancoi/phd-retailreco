@@ -35,7 +35,7 @@ g2
 tp15
 g4
 (g8
-S'\xc9\x0c\x10\x14\x8f\xd2\xa6?'
+S'\xc8\x0c\x10\x14\x8f\xd2\xa6?'
 p16
 tp17
 Rp18
@@ -57,7 +57,7 @@ g2
 tp25
 g4
 (g8
-S'vq\x1b\r\xe0-\xc0?'
+S'\xc5\x8f1w-!\xbf?'
 p26
 tp27
 Rp28
