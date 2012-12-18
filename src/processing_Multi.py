@@ -1050,6 +1050,8 @@ class BiasedRandomWalkWithRestartRecoModel():
 		try:
 			#(I-dP) R = (1-d) u or U
 			r = spLinalg.cgs(I-(self.alpha * self.P),(1-self.alpha)*u)
+			#r = linalg.solve(I-(self.alpha * self.P),(1-self.alpha)*u)
+			#print r.shape
 		except linalg.LinAlgError:
 			print 'Linear Algebra Error'
 			raise linalg.LinAlgError
@@ -1197,7 +1199,6 @@ class Evaluation:
 		self.perf = zeros((self.nbBaskets, len(self.testNames)))
 		for basket in arange(len(self.evidenceBaskets)):
 			count+=1
-			print count
 			if count%1000 == 0 :
 				print 'Basket number %s'%count
 				print 'Performances so far: '
