@@ -16,7 +16,7 @@ from scipy.io import mmwrite, mmread
 
 #from model import *
 dataFolder = '../data/'
-resultFolder = '../result2/' 
+resultFolder = '../resultMovieLens/' 
 
 #result2 --> cos
 #result --> bn
@@ -93,7 +93,68 @@ def loadToy():
 	data.BasketItemList.append(array([2,3,4]))
 	
 	return data
+
+def loadMovieLens():
+
+	print "Loading MovieLens ..."
+	userD = dict()
+	itemD = dict()
+	basketList = list()
+	testD = dict()
+	fullDataName = '../data/MovieLens/u.data'
+	fname='../data/MovieLens/u1.base'
 	
+	ftest='../data/MovieLens/u1.test'
+
+	def createIndexes(fileName):
+		print "  -- Create indexes"
+		with open(fileName, 'r') as f:
+			indU = 0
+			indI = 0
+			for line in f:
+				lineArray = line.split('\t')
+				if int(lineArray[0]) not in userD.keys():
+					userD[int(lineArray[0])] = indU
+					indU+=1
+				if int(lineArray[1]) not in itemD.keys():
+					itemD[int(lineArray[1])] = indI
+					indI+=1
+			
+			
+	def readMovieLensTrain(fileName):
+		print "  -- Read Movie Lens Train Set"
+		data = zeros((len(userD), len(itemD)))
+		with open(fileName, 'r') as f:
+			for line in f:
+				lineArray = line.split('\t')
+				data[userD[int(lineArray[0])], itemD[int(lineArray[1])]] = lineArray[2]
+		return data
+	
+	def readMovieLensTest(fileName):
+		print "  -- Read Movie Lens Test Set"
+		with open(fileName, 'r') as f:
+			for line in f:
+				lineArray = line.split('\t')
+				if int(lineArray[0]) not in testD.keys():
+					testD[int(lineArray[0])] = []
+				if int(lineArray[1]) in itemD.keys():
+					testD[int(lineArray[0])].append(itemD[int(lineArray[1])])
+		
+		for user in testD.keys():
+			basketList.append(array(testD[user]))
+		
+			
+	createIndexes(fullDataName)
+	dataUI = readMovieLensTrain(fullDataName)
+	readMovieLensTest(ftest)
+		
+	data = processing.TransactionPreprocessing()
+	data.UI = dataUI
+	data.userDict = userD 
+	data.itemDict = itemD
+	data.BasketItemList = basketList
+	
+	return data
 
 def load():
 	
@@ -593,7 +654,7 @@ def Pop(nbBasket, nbReco):
 
 
 
-data = load()
+data = loadMovieLens()
 baseProcessing = processing.RecoModel(data.getUserItemMatrix())
 
 def Multi_BRWWR(nbBasket, sim, nbReco):
@@ -755,16 +816,16 @@ def Multi_POP():
 	evalPop.savePerf(resultFolder+'Pop_nb%s.txt'%nbBasket)
 
 
-def drawSomeThing(nb='nb5000'):
+def drawSomeThing(nb='nb10000'):
 
 	expBRWWR = {}
 	expRWWR = {}
 	expCosine = {}
 	expPop = {}
 
-	for dirname, dirnames, filenames in os.walk('../result'):
-		#for subdirname in dirnames:
-		#    print os.path.join(dirname, subdirname)
+	for dirname, dirnames, filenames in os.walk(resultFolder):
+		for subdirname in dirnames:
+		    print os.path.join(dirname, subdirname)
 		for filename in filenames:
 			filePath = os.path.join(dirname, filename)
 			if '/BRWWRPerf' in filePath and nb in filePath:
@@ -805,7 +866,7 @@ def drawSomeThing(nb='nb5000'):
 				for perf in tmpDict:
 					expCosine[perf] = tmpDict[perf]
 
-
+	print expBRWWR
 	plt.figure()
 	for n, forPerf in enumerate(['_perf_Novelty', '_perf_bHR_pop', '_perf_wHR', '_perf_bHR_rnd']):
 		plt.subplot(2,2,n)
@@ -821,7 +882,7 @@ def drawSomeThing(nb='nb5000'):
 			plt.plot(xData, yData, label='t:%s'%(j))
 		#Baseline
 		plt.plot(xData, [expCosine[forPerf]]*len(xData), label='Cosine')
-		plt.plot(xData, [expPop[forPerf]]*len(xData), label='Pop')
+		#plt.plot(xData, [expPop[forPerf]]*len(xData), label='Pop')
 		plt.legend()
 	plt.show()
 
@@ -841,7 +902,7 @@ def drawSomeThing(nb='nb5000'):
 			plt.plot(xData, yData, label='Sim:%s'%(j))
 		#Baseline
 		plt.plot(xData, [expCosine[forPerf]]*len(xData), label='Cosine')
-		plt.plot(xData, [expPop[forPerf]]*len(xData), label='Pop')
+		#plt.plot(xData, [expPop[forPerf]]*len(xData), label='Pop')
 		plt.legend()
 	plt.show()
 

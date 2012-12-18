@@ -1197,12 +1197,13 @@ class Evaluation:
 		self.perf = zeros((self.nbBaskets, len(self.testNames)))
 		for basket in arange(len(self.evidenceBaskets)):
 			count+=1
+			print count
 			if count%1000 == 0 :
 				print 'Basket number %s'%count
 				print 'Performances so far: '
 				print self.testNames
 				print self.computePerf()
-			if len(self.evidenceBaskets[basket]) >=4 :
+			if len(self.evidenceBaskets[basket]) >=(self.n+1) :
 				for test in arange(len(self.testNames)):
 					self.perf[basket,test] = getattr(self, self.testNames[test])(self.evidenceBaskets[basket])
 			else:
@@ -1347,10 +1348,16 @@ class Evaluation:
 		evidences = [item for item in evidenceBasket if item not in targets]
 		minPop = min(self.model.ItemPop[evidences])
 		recoItems = self.model.recommend(evidences, -1)		
-		recoItems = [i for i in recoItems if self.model.ItemPop[i]<minPop][-10:]
+		
+		#TOFIX : This can lead to empty recoItem lists.  How can we ensure that there will be alsways 10 item less popular than the 
+		#less popular one ?
+		#recoItems = [i for i in recoItems if self.model.ItemPop[i]<minPop][-10:]
+		
+		recoItems = [i for i in recoItems if self.model.ItemPop[i]][-self.n:]
 		
 		recoPop = self.model.ItemPrior[recoItems]
-		#print 'Novelty rate : %s'%mean((self.meanMostPop - recoPop) / self.meanMostPop)
+		#print 'RecoItem : %s'%recoItems
+		#print 'Novelty rate : %s (%s, %s)'%(mean((self.meanMostPop - recoPop) / self.meanMostPop), self.meanMostPop, recoPop)
 		return mean((self.meanMostPop - recoPop) / self.meanMostPop)
 		
 
