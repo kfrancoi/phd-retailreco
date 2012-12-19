@@ -18,12 +18,14 @@ def cosineSimilarity(X):
 	'''
 	sX = sparse.csr_matrix(X)
 	K = sX.T * sX
-	K = matrix(K.toarray())
-	D = matrix(diag(power(diag(K),-0.5)))
-	Sim = D * K * D
+	#K = matrix(K.toarray())
+	Sim = matrix(K.toarray())
 	
-	#for i in arange(Sim.shape[0]):
-	#	Sim[i,i] = 0
+	#D = matrix(diag(power(diag(K),-0.5)))
+	#Sim = D * K * D
+	
+	for i in arange(Sim.shape[0]):
+		Sim[i,i] = 0
 	
 	return Sim
 
@@ -192,7 +194,16 @@ def BRWWR_Comp(Pref, C, theta):
 	
 	#return W
 	[Dr, Vr] = linalg.eig(W)
+	#debug_here()
 	
+	if max(Vr[:,0])<0 and min(Vr[:,0]) <0:
+		Vr[:,0] = -Vr[:,0]
+	elif max(Vr[:,0])>0 and min(Vr[:,0]) >0:
+		pass
+	else :
+		
+		debug_here()
+		
 	for i in xrange(Pref.shape[0]):
 		for j in xrange(Pref.shape[1]):
 			P[i,j] =  (Vr[j,0] * W[i,j]) / sum( Vr[:,0] * transpose(W[i,:]))

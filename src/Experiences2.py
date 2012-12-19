@@ -130,7 +130,7 @@ def loadMovieLens():
 		with open(fileName, 'r') as f:
 			for line in f:
 				lineArray = line.split('\t')
-				data[userD[int(lineArray[0])], itemD[int(lineArray[1])]] = lineArray[2]
+				data[userD[int(lineArray[0])], itemD[int(lineArray[1])]] = 1#lineArray[2]
 		return data
 	
 	def readMovieLensTest(fileName):
@@ -141,6 +141,7 @@ def loadMovieLens():
 				if int(lineArray[0]) not in testD.keys():
 					testD[int(lineArray[0])] = []
 				if int(lineArray[1]) in itemD.keys():
+					#testD[int(lineArray[0])].append(itemD[int(lineArray[1])])
 					testD[int(lineArray[0])].append(itemD[int(lineArray[1])])
 		
 		for user in testD.keys():
@@ -670,8 +671,8 @@ def Multi_BRWWR(nbBasket, sim, nbReco):
 	#nbBasket = 10000
 	#sim = 'cos'
 	#nbReco = 3
-	for alpha in [ pow(10,i) for i in [-2, -1.5, -1, -0.5, 0] ]:
-		for theta in [0.01, 0.05, 0.1, 0.5, 1, 3, 10]:
+	for alpha in [0.2, 0.5, 0.8, 0.9]:#[ pow(10,i) for i in [-2, -1.5, -1, -0.5, 0] ]:
+		for theta in [1e-3, 1e-2, 1e-1, 0, 1, 10, 100]:
 
 			print '###############################################################'
 			print '# Start Recommendation with alpha : %s,  and theta : %s'%(alpha, theta)
