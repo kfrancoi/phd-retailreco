@@ -8,6 +8,8 @@ import distance
 import scipy.sparse as sparse
 from numpy import *
 
+from IPython.core.debugger import Tracer; debug_here = Tracer()
+
 
 def cosineSimilarity(X):
 	''' 
@@ -186,12 +188,15 @@ def BRWWR_Comp(Pref, C, theta):
 	
 	W = array(exp(-theta * C))*array(Pref)
 	
+	#debug_here()
+	
 	#return W
 	[Dr, Vr] = linalg.eig(W)
 	
 	for i in xrange(Pref.shape[0]):
 		for j in xrange(Pref.shape[1]):
-			P[i,j] =  (Vr[j,0] * W[i,j]) / sum( Vr[:,0] * transpose(W[i,:]) )
+			P[i,j] =  (Vr[j,0] * W[i,j]) / sum( Vr[:,0] * transpose(W[i,:]))
 	
+	#debug_here()
 	return P
 	

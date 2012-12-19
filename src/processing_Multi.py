@@ -22,10 +22,9 @@ import getopt
 
 import visualization
 
-#from IPython.Debugger import Tracer
+from IPython.core.debugger import Tracer; debug_here = Tracer()
 from numpy.core.numeric import zeros_like
 
-#debug_here = Tracer()
 
 sys.path.append("../libraries/plsa")
 import plsa 
@@ -988,11 +987,11 @@ class BiasedRandomWalkWithRestartRecoModel():
 	
 	def train(self):
 		print "Start training..."
-		
+		#debug_here()
 		#self.Cost = repeat(reshape(self.ItemPrior, (self.ItemPrior.shape[0],1)), self.ItemPrior.shape[0], axis=0)
 		self.Cost = repeat(reshape(self.ItemPrior, (1,self.ItemPrior.shape[0])), self.ItemPrior.shape[0], axis=0)
 		print self.Cost.shape
-		
+		#debug_here()
 		if (self.sim == 'cos'):
 			self.Sim = toolBox.cosineSimilarity(self.UI)
 			self.Pref = toolBox.AtoP(self.Sim)

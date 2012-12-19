@@ -14,9 +14,12 @@ import pickle
 from numpy import *
 from scipy.io import mmwrite, mmread
 
+from IPython.core.debugger import Tracer; debug_here = Tracer()
+
 #from model import *
 dataFolder = '../data/'
 resultFolder = '../resultMovieLens/' 
+#resultFolder = '../result2/' 
 
 #result2 --> cos
 #result --> bn
@@ -655,6 +658,7 @@ def Pop(nbBasket, nbReco):
 
 
 data = loadMovieLens()
+#data = load()
 baseProcessing = processing.RecoModel(data.getUserItemMatrix())
 
 def Multi_BRWWR(nbBasket, sim, nbReco):
