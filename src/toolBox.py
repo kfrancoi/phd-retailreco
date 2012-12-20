@@ -201,8 +201,10 @@ def BRWWR_Comp(Pref, C, theta):
 	elif max(Vr[:,0])>0 and min(Vr[:,0]) >0:
 		pass
 	else :
-		
-		debug_here()
+		print "ERROR : Eigen vectors with positive and negative value!"
+		print Vr[:,0]
+		print "---"
+		#debug_here()
 		
 	for i in xrange(Pref.shape[0]):
 		for j in xrange(Pref.shape[1]):
