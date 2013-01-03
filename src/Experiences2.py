@@ -671,8 +671,8 @@ def Multi_BRWWR(nbBasket, sim, nbReco):
 	#nbBasket = 10000
 	#sim = 'cos'
 	#nbReco = 3
-	for alpha in [0.2, 0.5, 0.8, 0.9]:#[ pow(10,i) for i in [-2, -1.5, -1, -0.5, 0] ]:
-		for theta in [1e-3, 1e-2, 1e-1, 0, 1, 10, 100]:
+	for alpha in [0.5, 0.8, 0.9]:#[0.2, 0.5, 0.8, 0.9]:#[ pow(10,i) for i in [-2, -1.5, -1, -0.5, 0] ]:
+		for theta in [1e-3, 1e-2, 1e-1, 0, 1, 10]:
 
 			print '###############################################################'
 			print '# Start Recommendation with alpha : %s,  and theta : %s'%(alpha, theta)
