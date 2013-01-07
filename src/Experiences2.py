@@ -18,7 +18,8 @@ from IPython.core.debugger import Tracer; debug_here = Tracer()
 
 #from model import *
 dataFolder = '../data/'
-resultFolder = '../resultMovieLens/' 
+resultFolder = '../resultMovieLens_nr3/' 
+resultFolder = '../resultMovieLens2/' 
 #resultFolder = '../result2/' 
 
 #result2 --> cos
@@ -671,7 +672,7 @@ def Multi_BRWWR(nbBasket, sim, nbReco):
 	#nbBasket = 10000
 	#sim = 'cos'
 	#nbReco = 3
-	for alpha in [0.5, 0.8, 0.9]:#[0.2, 0.5, 0.8, 0.9]:#[ pow(10,i) for i in [-2, -1.5, -1, -0.5, 0] ]:
+	for alpha in [0.1, 0.3, 0.5, 0.8, 0.9]:#[0.2, 0.5, 0.8, 0.9]:#[ pow(10,i) for i in [-2, -1.5, -1, -0.5, 0] ]:
 		for theta in [1e-3, 1e-2, 1e-1, 0, 1, 10]:
 
 			print '###############################################################'
@@ -875,7 +876,7 @@ def drawSomeThing(nb='nb10000'):
 	plt.figure()
 	for n, forPerf in enumerate(['_perf_Novelty', '_perf_bHR_pop', '_perf_wHR', '_perf_bHR_rnd']):
 		plt.subplot(2,2,n)
-		for j in sort([t for t in expBRWWR[forPerf][0.1]]):
+		for j in sort([t for t in expBRWWR[forPerf][0.5]]):
 			xData = []
 			yData = []
 			for i in sort([a for a in expBRWWR[forPerf]]):
@@ -895,7 +896,7 @@ def drawSomeThing(nb='nb10000'):
 	plt.figure()
 	for n, forPerf in enumerate(['_perf_Novelty', '_perf_bHR_pop', '_perf_wHR', '_perf_bHR_rnd']):
 		plt.subplot(2,2,n)
-		for j in sort([sim for sim in expRWWR[forPerf][0.1]]):
+		for j in sort([sim for sim in expRWWR[forPerf][0.5]]):
 			xData = []
 			yData = []
 			for i in sort([a for a in expRWWR[forPerf]]):
