@@ -18,9 +18,10 @@ from IPython.core.debugger import Tracer; debug_here = Tracer()
 
 #from model import *
 dataFolder = '../data/'
-resultFolder = '../resultMovieLens_nr3/' 
-resultFolder = '../resultMovieLens2/' 
+#resultFolder = '../resultMovieLens_nr3/' 
+#resultFolder = '../resultMovieLens2/' 
 #resultFolder = '../result2/' 
+resultFolder = '../resultTaFeng/'
 
 #result2 --> cos
 #result --> bn
@@ -659,8 +660,8 @@ def Pop(nbBasket, nbReco):
 
 
 
-data = loadMovieLens()
-#data = load()
+#data = loadMovieLens()
+data = load()
 baseProcessing = processing.RecoModel(data.getUserItemMatrix())
 
 def Multi_BRWWR(nbBasket, sim, nbReco):
@@ -673,7 +674,7 @@ def Multi_BRWWR(nbBasket, sim, nbReco):
 	#sim = 'cos'
 	#nbReco = 3
 	for alpha in [0.1, 0.3, 0.5, 0.8, 0.9]:#[0.2, 0.5, 0.8, 0.9]:#[ pow(10,i) for i in [-2, -1.5, -1, -0.5, 0] ]:
-		for theta in [1e-3, 1e-2, 1e-1, 0, 1, 10]:
+		for theta in [1e-3, 1e-2, 1e-1, 0, 1, 2]:
 
 			print '###############################################################'
 			print '# Start Recommendation with alpha : %s,  and theta : %s'%(alpha, theta)
