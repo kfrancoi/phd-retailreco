@@ -20,7 +20,7 @@ import toolBox
 import time
 import getopt
 
-import visualization
+#import visualization
 
 from IPython.core.debugger import Tracer; debug_here = Tracer()
 from numpy.core.numeric import zeros_like
