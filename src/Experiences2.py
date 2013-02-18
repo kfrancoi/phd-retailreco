@@ -17,11 +17,12 @@ from scipy.io import mmwrite, mmread
 from IPython.core.debugger import Tracer; debug_here = Tracer()
 
 #from model import *
-dataFolder = '../data/'
+#dataFolder = '../data/'
+resultFolder = '../resultMovieLens_nr4/' 
 #resultFolder = '../resultMovieLens_nr3/' 
 #resultFolder = '../resultMovieLens2/' 
 #resultFolder = '../result2/' 
-resultFolder = '../resultTaFeng/'
+#resultFolder = '../resultTaFeng/'
 
 #result2 --> cos
 #result --> bn
@@ -660,8 +661,8 @@ def Pop(nbBasket, nbReco):
 
 
 
-#data = loadMovieLens()
-data = load()
+data = loadMovieLens()
+#data = load()
 baseProcessing = processing.RecoModel(data.getUserItemMatrix())
 
 def Multi_BRWWR(nbBasket, sim, nbReco):
