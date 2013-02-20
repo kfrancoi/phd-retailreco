@@ -17,7 +17,7 @@ from scipy.io import mmwrite, mmread
 from IPython.core.debugger import Tracer; debug_here = Tracer()
 
 #from model import *
-#dataFolder = '../data/'
+dataFolder = '../data/'
 #resultFolder = '../resultMovieLens_nr4/' 
 #resultFolder = '../resultMovieLens_nr3/' 
 #resultFolder = '../resultMovieLens2/' 
