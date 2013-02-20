@@ -8,7 +8,7 @@ import sys
 import os
 import time
 import datetime
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import processing_Multi as processing
 import pickle
 from numpy import *
