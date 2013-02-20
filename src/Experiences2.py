@@ -8,7 +8,7 @@ import sys
 import os
 import time
 import datetime
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import processing_Multi as processing
 import pickle
 from numpy import *
@@ -18,11 +18,11 @@ from IPython.core.debugger import Tracer; debug_here = Tracer()
 
 #from model import *
 #dataFolder = '../data/'
-resultFolder = '../resultMovieLens_nr4/' 
+#resultFolder = '../resultMovieLens_nr4/' 
 #resultFolder = '../resultMovieLens_nr3/' 
 #resultFolder = '../resultMovieLens2/' 
 #resultFolder = '../result2/' 
-#resultFolder = '../resultTaFeng/'
+resultFolder = '../resultTaFeng/'
 
 #result2 --> cos
 #result --> bn
@@ -661,8 +661,8 @@ def Pop(nbBasket, nbReco):
 
 
 
-data = loadMovieLens()
-#data = load()
+#data = loadMovieLens()
+data = load()
 baseProcessing = processing.RecoModel(data.getUserItemMatrix())
 
 def Multi_BRWWR(nbBasket, sim, nbReco):
@@ -715,9 +715,9 @@ def Multi_BRWWR(nbBasket, sim, nbReco):
 def Multi_RW(nbBasket, sim, nbReco):
 	a = [0.01, 0.05, 0.1, 0.5, 0.8, 0.9]
 	#a= [0.9]
-	sim = 'cos'
-	nbBasket = 5000
-	nbReco = 3
+	#sim = 'cos'
+	#nbBasket = 5000
+	#nbReco = 3
 	
 	for alpha in a:
 		print '###############################################################'
@@ -835,6 +835,7 @@ def drawSomeThing(nb='nb10000'):
 		for subdirname in dirnames:
 		    print os.path.join(dirname, subdirname)
 		for filename in filenames:
+			print filename
 			filePath = os.path.join(dirname, filename)
 			if '/BRWWRPerf' in filePath and nb in filePath:
 				print filePath
@@ -898,6 +899,7 @@ def drawSomeThing(nb='nb10000'):
 	plt.figure()
 	for n, forPerf in enumerate(['_perf_Novelty', '_perf_bHR_pop', '_perf_wHR', '_perf_bHR_rnd']):
 		plt.subplot(2,2,n)
+		print expRWWR
 		for j in sort([sim for sim in expRWWR[forPerf][0.5]]):
 			xData = []
 			yData = []
