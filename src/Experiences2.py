@@ -8,7 +8,7 @@ import sys
 import os
 import time
 import datetime
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import processing_Multi as processing
 import pickle
 from numpy import *
@@ -18,11 +18,11 @@ from IPython.core.debugger import Tracer; debug_here = Tracer()
 
 #from model import *
 dataFolder = '../data/'
-resultFolder = '../resultMovieLens_nr4/' 
+#resultFolder = '../resultMovieLens_nr4/' 
 #resultFolder = '../resultMovieLens_nr3/' 
 #resultFolder = '../resultMovieLens2/' 
 #resultFolder = '../result2/' 
-#resultFolder = '../resultTaFeng/'
+resultFolder = '../resultTaFeng/'
 
 #result2 --> cos
 #result --> bn
